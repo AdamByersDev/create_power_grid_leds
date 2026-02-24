@@ -1,0 +1,49 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+#issueTrackerURL = ""
+license = "Insert License Here"
+
+[[mods]]
+modId = "create_power_grid_leds"
+version = "${version}"
+displayName = "Create: Power Grid LEDs"
+authors = "Adam Byers"
+description = '''
+An addon for Create: Power Grid that adds LED bulbs.
+'''
+#logoFile = ""
+
+[[dependencies.create_power_grid_leds]]
+modId = "forge"
+mandatory = true
+versionRange = "${forge_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.create_power_grid_leds]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[${minecraft_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.create_power_grid_leds]]
+modId = "architectury"
+mandatory = true
+versionRange = "[${architectury_api_version},)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.create_power_grid_leds]]
+modId = "create"
+mandatory = true
+versionRange = "${create_forge_version}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.create_power_grid_leds]]
+modId = "powergrid"
+mandatory = true
+versionRange = "${powergrid_version}"
+ordering = "NONE"
+side = "BOTH"

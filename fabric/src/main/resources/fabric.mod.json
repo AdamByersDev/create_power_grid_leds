@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "create_power_grid_leds",
+  "version": "${version}",
+  "name": "Create: Power Grid LEDs",
+  "description": "An addon for Create: Power Grid that adds LED bulbs.",
+  "authors": [
+    "Adam Byers"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/create_power_grid_leds/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "ca.abyers.fabric.ExampleModFabric"
+    ],
+    "client": [
+      "ca.abyers.fabric.client.ExampleModFabricClient"
+    ]
+  },
+  "mixins": [
+    "create_power_grid_leds.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "architectury": ">=$architectury_api_version",
+    "fabric-api": "*",
+		"create": "${create_fabric_version}",
+    "powergrid": "${powergrid_version}"
+  }
+}
