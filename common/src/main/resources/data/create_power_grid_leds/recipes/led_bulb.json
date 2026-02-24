@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    " B ",
+    " C "
+  ],
+  "key": {
+    "A": {
+      "tag": "minecraft:coals"
+    },
+    "B": {
+      "item": "create_power_grid_leds:lv_led_bulb"
+    },
+    "C": {
+      "item": "powergrid:copper_coil"
+    }
+  },
+  "result": {
+    "item": "create_power_grid_leds:led_bulb",
+    "count": 1
+  }
+}
