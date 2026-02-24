@@ -33,18 +33,18 @@ public class LedLightBulb extends LightBulb {
     public LedLightBulb(Item.Properties settings) {
         super(settings);
         this.canBeDyed = true;
-        this.modelSupplier = () -> state -> PartialModel.of(powerGridId(switch (state) {
-            case OFF -> "block/lamps/light_bulb";
-            case LOW_POWER, ON -> "block/lamps/light_bulb_on";
-            case BROKEN -> "block/lamps/light_bulb_broken";
-            case LIGHT -> "block/lamps/light_bulb_light";
+        this.modelSupplier = () -> state -> PartialModel.of(modId(switch (state) {
+            case OFF -> "block/lamps/led_bulb";
+            case LOW_POWER, ON -> "block/lamps/led_bulb_on";
+            case BROKEN -> "block/lamps/led_bulb_broken";
+            case LIGHT -> "block/lamps/led_bulb_light";
         }));
-        this.dyedModelSupplier = () -> state -> PartialModel.of(powerGridId(switch (state) {
-            case OFF -> "block/lamps/dyed_light_bulb";
-            case LOW_POWER, ON -> "block/lamps/dyed_light_bulb_on";
-            case BROKEN -> "block/lamps/dyed_light_bulb_broken";
-            case LIGHT -> "block/lamps/dyed_light_bulb_light";
-            case BULB -> "block/lamps/dyed_light_bulb_bulb";
+        this.dyedModelSupplier = () -> state -> PartialModel.of(modId(switch (state) {
+            case OFF -> "block/lamps/dyed_led_bulb";
+            case LOW_POWER, ON -> "block/lamps/dyed_led_bulb_on";
+            case BROKEN -> "block/lamps/dyed_led_bulb_broken";
+            case LIGHT -> "block/lamps/dyed_led_bulb_light";
+            case BULB -> "block/lamps/dyed_led_bulb_bulb";
         }));
         applyRatedValues(
                 RATED_POWER_WATTS,
@@ -97,8 +97,8 @@ public class LedLightBulb extends LightBulb {
         }
     }
 
-    private static ResourceLocation powerGridId(String path) {
-        return new ResourceLocation("powergrid", path);
+    private static ResourceLocation modId(String path) {
+        return new ResourceLocation("create_power_grid_leds", path);
     }
 
     private void applyRatedValues(
