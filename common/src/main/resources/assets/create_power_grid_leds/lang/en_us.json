@@ -1,3 +1,4 @@
 {
-  "item.create_power_grid_leds.lv_led_bulb": "LV LED Bulb"
+  "item.create_power_grid_leds.lv_led_bulb": "LV LED Bulb",
+  "item.create_power_grid_leds.led_bulb": "LED Bulb"
 }

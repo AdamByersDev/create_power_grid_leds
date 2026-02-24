@@ -21,16 +21,16 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.List;
 
-public class LvLedLightBulb extends LightBulb {
+public class LedLightBulb extends LightBulb {
     private static final float RATED_POWER_WATTS = 3.0f;
-    private static final float RATED_VOLTAGE_VOLTS = 12.0f;
+    private static final float RATED_VOLTAGE_VOLTS = 120.0f;
     private static final float TEMPERATURE_AT_RATED_RESISTANCE = 1450.0f;
     private static final float MIN_RESISTANCE_FACTOR = 0.85f;
     private static final float THERMAL_MASS = 0.003f;
     private static final float OVERHEAT_TEMPERATURE = 2100.0f;
     private static final float DISSIPATION_DIVISOR = 1450.0f;
 
-    public LvLedLightBulb(Item.Properties settings) {
+    public LedLightBulb(Item.Properties settings) {
         super(settings);
         this.canBeDyed = true;
         this.modelSupplier = () -> state -> PartialModel.of(powerGridId(switch (state) {
