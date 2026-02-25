@@ -16,7 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "ca.abyers.fabric.ExampleModFabric"
+      "ca.abyers.fabric.PowergridLedsFabric"
     ],
     "client": [
       "ca.abyers.fabric.client.ExampleModFabricClient"
