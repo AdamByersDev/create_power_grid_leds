@@ -1,5 +1,6 @@
 package ca.abyers.content.light.bulb;
 
+import ca.abyers.PowergridLeds;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -29,23 +30,32 @@ public class LedLightBulb extends LightBulb {
     private static final float THERMAL_MASS = 0.00015f;
     private static final float OVERHEAT_TEMPERATURE = 2100.0f;
     private static final float DISSIPATION_DIVISOR = 1450.0f;
+    private static final PartialModel MODEL_OFF = partial("block/lamps/light_bulb");
+    private static final PartialModel MODEL_ON = partial("block/lamps/light_bulb_on");
+    private static final PartialModel MODEL_BROKEN = partial("block/lamps/light_bulb_broken");
+    private static final PartialModel MODEL_LIGHT = partial("block/lamps/light_bulb_light");
+    private static final PartialModel DYED_MODEL_OFF = partial("block/lamps/dyed_light_bulb");
+    private static final PartialModel DYED_MODEL_ON = partial("block/lamps/dyed_light_bulb_on");
+    private static final PartialModel DYED_MODEL_BROKEN = partial("block/lamps/dyed_light_bulb_broken");
+    private static final PartialModel DYED_MODEL_LIGHT = partial("block/lamps/dyed_light_bulb_light");
+    private static final PartialModel DYED_MODEL_BULB = partial("block/lamps/dyed_light_bulb_bulb");
 
     public LedLightBulb(Item.Properties settings) {
         super(settings);
         this.canBeDyed = true;
-        this.modelSupplier = () -> state -> PartialModel.of(powerGridId(switch (state) {
-            case OFF -> "block/lamps/light_bulb";
-            case LOW_POWER, ON -> "block/lamps/light_bulb_on";
-            case BROKEN -> "block/lamps/light_bulb_broken";
-            case LIGHT -> "block/lamps/light_bulb_light";
-        }));
-        this.dyedModelSupplier = () -> state -> PartialModel.of(powerGridId(switch (state) {
-            case OFF -> "block/lamps/dyed_light_bulb";
-            case LOW_POWER, ON -> "block/lamps/dyed_light_bulb_on";
-            case BROKEN -> "block/lamps/dyed_light_bulb_broken";
-            case LIGHT -> "block/lamps/dyed_light_bulb_light";
-            case BULB -> "block/lamps/dyed_light_bulb_bulb";
-        }));
+        this.modelSupplier = () -> state -> switch (state) {
+            case OFF -> MODEL_OFF;
+            case LOW_POWER, ON -> MODEL_ON;
+            case BROKEN -> MODEL_BROKEN;
+            case LIGHT -> MODEL_LIGHT;
+        };
+        this.dyedModelSupplier = () -> state -> switch (state) {
+            case OFF -> DYED_MODEL_OFF;
+            case LOW_POWER, ON -> DYED_MODEL_ON;
+            case BROKEN -> DYED_MODEL_BROKEN;
+            case LIGHT -> DYED_MODEL_LIGHT;
+            case BULB -> DYED_MODEL_BULB;
+        };
         applyRatedValues(
                 RATED_POWER_WATTS,
                 RATED_VOLTAGE_VOLTS,
@@ -97,8 +107,12 @@ public class LedLightBulb extends LightBulb {
         }
     }
 
+    private static PartialModel partial(String path) {
+        return PartialModel.of(powerGridId(path));
+    }
+
     private static ResourceLocation powerGridId(String path) {
-        return new ResourceLocation("powergrid", path);
+        return new ResourceLocation(PowergridLeds.MOD_ID, path);
     }
 
     private void applyRatedValues(

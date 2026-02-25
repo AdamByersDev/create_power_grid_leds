@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " A ",
     " B ",
+    "DAD",
     " C "
   ],
   "key": {
@@ -14,6 +14,9 @@
     },
     "C": {
       "item": "powergrid:copper_coil"
+    },
+    "D": {
+      "item": "minecraft:quartz"
     }
   },
   "result": {
