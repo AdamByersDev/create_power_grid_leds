@@ -32,6 +32,6 @@
     "architectury": ">=$architectury_api_version",
     "fabric-api": "*",
 		"create": "${create_fabric_version}",
-    "powergrid": "${powergrid_version}"
+    "powergrid": "${powergrid_version_range_fabric}"
   }
 }
