@@ -11,7 +11,7 @@ authors = "Adam Byers"
 description = '''
 An addon for Create: Power Grid that adds LED bulbs.
 '''
-#logoFile = ""
+logoFile = "assets/create_power_grid_leds/icon.png"
 
 [[dependencies.create_power_grid_leds]]
 modId = "forge"
