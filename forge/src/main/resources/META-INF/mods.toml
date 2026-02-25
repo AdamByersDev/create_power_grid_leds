@@ -16,14 +16,14 @@ logoFile = "assets/create_power_grid_leds/icon.png"
 [[dependencies.create_power_grid_leds]]
 modId = "forge"
 mandatory = true
-versionRange = "${forge_version_range}"
+versionRange = "[${forge_version},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.create_power_grid_leds]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[${minecraft_version},)"
+versionRange = "[${minecraft_version}]"
 ordering = "NONE"
 side = "BOTH"
 
@@ -37,13 +37,13 @@ side = "BOTH"
 [[dependencies.create_power_grid_leds]]
 modId = "create"
 mandatory = true
-versionRange = "${create_forge_version}"
+versionRange = "[${create_forge_version},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.create_power_grid_leds]]
 modId = "powergrid"
 mandatory = true
-versionRange = "${powergrid_version_range_forge}"
+versionRange = "[${powergrid_version},)"
 ordering = "NONE"
 side = "BOTH"

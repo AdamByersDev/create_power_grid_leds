@@ -60,12 +60,11 @@ dependencies {
 processResources {
     def resourceTokens = [
         version: project.version,
-        forge_version_range: project.forge_version_range,
+        forge_version: project.forge_version,
         minecraft_version: project.minecraft_version,
         architectury_api_version: project.architectury_api_version,
         create_forge_version: project.create_forge_version,
-        powergrid_version: project.powergrid_version,
-        powergrid_version_range_forge: project.powergrid_version_range_forge
+        powergrid_version: project.powergrid_version
     ]
     inputs.properties(resourceTokens)
 
