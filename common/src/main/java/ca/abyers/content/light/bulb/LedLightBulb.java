@@ -26,7 +26,7 @@ public class LedLightBulb extends LightBulb {
     private static final float RATED_VOLTAGE_VOLTS = 120.0f;
     private static final float TEMPERATURE_AT_RATED_RESISTANCE = 1450.0f;
     private static final float MIN_RESISTANCE_FACTOR = 0.85f;
-    private static final float THERMAL_MASS = 0.003f;
+    private static final float THERMAL_MASS = 0.00015f;
     private static final float OVERHEAT_TEMPERATURE = 2100.0f;
     private static final float DISSIPATION_DIVISOR = 1450.0f;
 
