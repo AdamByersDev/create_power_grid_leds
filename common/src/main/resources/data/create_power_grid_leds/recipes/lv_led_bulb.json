@@ -10,7 +10,7 @@
       "item": "minecraft:glass_pane"
     },
     "B": {
-      "item": "minecraft:glowstone_dust"
+      "item": "create_power_grid_leds:led_filament"
     },
     "C": {
       "item": "create:iron_sheet"

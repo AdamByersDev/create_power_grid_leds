@@ -18,6 +18,7 @@ public final class ModCreativeTabs {
                     .title(Component.translatable("itemGroup." + PowergridLeds.MOD_ID))
                     .icon(() -> new ItemStack(ModItems.LED_BULB.get()))
                     .displayItems((parameters, output) -> {
+                        output.accept(ModItems.LED_FILAMENT.get());
                         output.accept(ModItems.LED_BULB.get());
                         output.accept(ModItems.LV_LED_BULB.get());
                     })

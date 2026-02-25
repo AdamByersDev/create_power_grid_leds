@@ -1,0 +1,34 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "powergrid:wire"
+  },
+  "transitionalItem": {
+    "item": "powergrid:wire"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "powergrid:wire"
+        },
+        {
+          "item": "minecraft:glowstone_dust"
+        }
+      ],
+      "results": [
+        {
+          "item": "powergrid:wire"
+        }
+      ]
+    }
+  ],
+  "loops": 3,
+  "results": [
+    {
+      "item": "create_power_grid_leds:led_filament",
+      "count": 1
+    }
+  ]
+}

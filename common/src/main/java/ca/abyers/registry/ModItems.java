@@ -13,6 +13,7 @@ public final class ModItems {
 
     public static final RegistrySupplier<Item> LV_LED_BULB = ITEMS.register("lv_led_bulb", () -> new LvLedLightBulb(new Item.Properties()));
     public static final RegistrySupplier<Item> LED_BULB = ITEMS.register("led_bulb", () -> new LedLightBulb(new Item.Properties()));
+    public static final RegistrySupplier<Item> LED_FILAMENT = ITEMS.register("led_filament", () -> new Item(new Item.Properties()));
 
     private ModItems() {
     }
