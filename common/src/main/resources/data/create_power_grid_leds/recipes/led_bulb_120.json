@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "DAD",
+    " C "
+  ],
+  "key": {
+    "A": {
+      "tag": "minecraft:coals"
+    },
+    "B": {
+      "item": "create_power_grid_leds:led_bulb_12"
+    },
+    "C": {
+      "item": "powergrid:copper_coil"
+    },
+    "D": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "result": {
+    "item": "create_power_grid_leds:led_bulb_120",
+    "count": 1
+  }
+}

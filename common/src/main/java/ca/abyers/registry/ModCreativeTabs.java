@@ -16,11 +16,12 @@ public final class ModCreativeTabs {
             "main",
             () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                     .title(Component.translatable("itemGroup." + PowergridLeds.MOD_ID))
-                    .icon(() -> new ItemStack(ModItems.LED_BULB.get()))
+                    .icon(() -> new ItemStack(ModItems.LED_BULB_120.get()))
                     .displayItems((parameters, output) -> {
                         output.accept(ModItems.LED_FILAMENT.get());
-                        output.accept(ModItems.LED_BULB.get());
-                        output.accept(ModItems.LV_LED_BULB.get());
+                        output.accept(ModItems.LED_BULB_12.get());
+                        output.accept(ModItems.LED_BULB_120.get());
+                        output.accept(ModItems.LED_BULB_240.get());
                     })
                     .build());
 

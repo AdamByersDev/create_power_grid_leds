@@ -3,15 +3,13 @@ architectury {
 }
 
 dependencies {
-    // We depend on Fabric Loader here to use the Fabric @Environment annotations,
-    // which get remapped to the correct annotations on each platform.
-    // Do NOT use other classes from Fabric Loader.
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
-
     // Architectury API. This is optional, and you can comment it out if you don't need it.
     modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
 
     // Compile against Power Grid types from common code.
-    modCompileOnly "maven.modrinth:power-grid:${rootProject.powergrid_version}"
-    modCompileOnly "dev.engine-room.flywheel:flywheel-fabric-api-${rootProject.minecraft_version}:${rootProject.flywheel_fabric_version}"
+    compileOnly "maven.modrinth:power-grid:${rootProject.powergrid_neoforge_version}"
+    compileOnly("com.simibubi.create:create-${rootProject.minecraft_version}:${rootProject.create_neoforge_version}:slim") { transitive false }
+    compileOnly("net.createmod.ponder:ponder-neoforge:${rootProject.ponder_neoforge_version}+mc${rootProject.minecraft_version}")
+    compileOnly "dev.engine-room.flywheel:flywheel-neoforge-api-${rootProject.minecraft_version}:${rootProject.flywheel_neoforge_version}"
+    compileOnly "com.tterrag.registrate:Registrate:${rootProject.registrate_neoforge_version}"
 }
