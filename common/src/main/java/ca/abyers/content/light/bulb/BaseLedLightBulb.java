@@ -6,10 +6,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 import org.patryk3211.powergrid.electricity.light.bulb.ILightBulb;
 import org.patryk3211.powergrid.electricity.light.bulb.LightBulb;
 import org.patryk3211.powergrid.electricity.light.bulb.LightBulbState;
@@ -66,7 +65,7 @@ abstract class BaseLedLightBulb extends LightBulb {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         tooltipComponents.add(Component.translatable("powergrid.tooltip.holdForDescription",
                         Component.translatable("create.tooltip.keyShift"))
                 .withStyle(ChatFormatting.DARK_GRAY));
@@ -93,7 +92,7 @@ abstract class BaseLedLightBulb extends LightBulb {
     }
 
     private static ResourceLocation powerGridId(String path) {
-        return new ResourceLocation(PowergridLeds.MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(PowergridLeds.MOD_ID, path);
     }
 
     private void applyRatedValues(
