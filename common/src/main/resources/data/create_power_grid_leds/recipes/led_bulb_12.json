@@ -17,7 +17,7 @@
     }
   },
   "result": {
-    "item": "create_power_grid_leds:lv_led_bulb",
+    "item": "create_power_grid_leds:led_bulb_12",
     "count": 1
   }
 }

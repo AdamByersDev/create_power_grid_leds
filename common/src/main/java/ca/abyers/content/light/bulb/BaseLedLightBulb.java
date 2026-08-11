@@ -1,64 +1,60 @@
 package ca.abyers.content.light.bulb;
 
 import ca.abyers.PowergridLeds;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 import org.patryk3211.powergrid.electricity.light.bulb.ILightBulb;
 import org.patryk3211.powergrid.electricity.light.bulb.LightBulb;
 import org.patryk3211.powergrid.electricity.light.bulb.LightBulbState;
 import org.patryk3211.powergrid.electricity.light.fixture.LightFixtureBlockEntity;
 
-import org.jetbrains.annotations.Nullable;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.List;
 
-public class LedLightBulb extends LightBulb {
+abstract class BaseLedLightBulb extends LightBulb {
     private static final float RATED_POWER_WATTS = 3.0f;
-    private static final float RATED_VOLTAGE_VOLTS = 120.0f;
     private static final float TEMPERATURE_AT_RATED_RESISTANCE = 1450.0f;
     private static final float MIN_RESISTANCE_FACTOR = 0.85f;
     private static final float THERMAL_MASS = 0.00015f;
     private static final float OVERHEAT_TEMPERATURE = 2100.0f;
     private static final float DISSIPATION_DIVISOR = 1450.0f;
-    private static final PartialModel MODEL_OFF = partial("block/lamps/light_bulb");
-    private static final PartialModel MODEL_ON = partial("block/lamps/light_bulb_on");
-    private static final PartialModel MODEL_BROKEN = partial("block/lamps/light_bulb_broken");
-    private static final PartialModel MODEL_LIGHT = partial("block/lamps/light_bulb_light");
-    private static final PartialModel DYED_MODEL_OFF = partial("block/lamps/dyed_light_bulb");
-    private static final PartialModel DYED_MODEL_ON = partial("block/lamps/dyed_light_bulb_on");
-    private static final PartialModel DYED_MODEL_BROKEN = partial("block/lamps/dyed_light_bulb_broken");
-    private static final PartialModel DYED_MODEL_LIGHT = partial("block/lamps/dyed_light_bulb_light");
-    private static final PartialModel DYED_MODEL_BULB = partial("block/lamps/dyed_light_bulb_bulb");
 
-    public LedLightBulb(Item.Properties settings) {
+    protected BaseLedLightBulb(Item.Properties settings, float ratedVoltageVolts, String modelSuffix) {
         super(settings);
+        final PartialModel modelOff = partial("block/lamps/light_bulb_" + modelSuffix);
+        final PartialModel modelOn = partial("block/lamps/light_bulb_on_" + modelSuffix);
+        final PartialModel modelBroken = partial("block/lamps/light_bulb_broken_" + modelSuffix);
+        final PartialModel modelLight = partial("block/lamps/light_bulb_light_" + modelSuffix);
+        final PartialModel dyedModelOff = partial("block/lamps/dyed_light_bulb_" + modelSuffix);
+        final PartialModel dyedModelOn = partial("block/lamps/dyed_light_bulb_on_" + modelSuffix);
+        final PartialModel dyedModelBroken = partial("block/lamps/dyed_light_bulb_broken_" + modelSuffix);
+        final PartialModel dyedModelLight = partial("block/lamps/dyed_light_bulb_light_" + modelSuffix);
+        final PartialModel dyedModelBulb = partial("block/lamps/dyed_light_bulb_bulb_" + modelSuffix);
         this.canBeDyed = true;
         this.modelSupplier = () -> state -> switch (state) {
-            case OFF -> MODEL_OFF;
-            case LOW_POWER, ON -> MODEL_ON;
-            case BROKEN -> MODEL_BROKEN;
-            case LIGHT -> MODEL_LIGHT;
+            case OFF -> modelOff;
+            case LOW_POWER, ON -> modelOn;
+            case BROKEN -> modelBroken;
+            case LIGHT -> modelLight;
         };
         this.dyedModelSupplier = () -> state -> switch (state) {
-            case OFF -> DYED_MODEL_OFF;
-            case LOW_POWER, ON -> DYED_MODEL_ON;
-            case BROKEN -> DYED_MODEL_BROKEN;
-            case LIGHT -> DYED_MODEL_LIGHT;
-            case BULB -> DYED_MODEL_BULB;
+            case OFF -> dyedModelOff;
+            case LOW_POWER, ON -> dyedModelOn;
+            case BROKEN -> dyedModelBroken;
+            case LIGHT -> dyedModelLight;
+            case BULB -> dyedModelBulb;
         };
         applyRatedValues(
                 RATED_POWER_WATTS,
-                RATED_VOLTAGE_VOLTS,
+                ratedVoltageVolts,
                 TEMPERATURE_AT_RATED_RESISTANCE,
                 THERMAL_MASS
         );
@@ -68,24 +64,12 @@ public class LedLightBulb extends LightBulb {
     public LightBulbState createState(LightFixtureBlockEntity fixture) {
         return new State(this, fixture, modelSupplier, dyedModelSupplier);
     }
-    
+
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-            tooltipComponents.add(Component.translatable("powergrid.tooltip.holdForDescription",
-                    Component.translatable("create.tooltip.keyShift"))
-                    .withStyle(ChatFormatting.DARK_GRAY));
-    }
-
-    private static Component propertiesHeader(boolean holdingShift) {
-        final String[] headerParts = Component.translatable("powergrid.tooltip.holdForDescription", "$")
-                .getString()
-                .split("\\$");
-        final MutableComponent keyComponent = Component.translatable("create.tooltip.keyShift").copy()
-                .withStyle(holdingShift ? ChatFormatting.WHITE : ChatFormatting.GRAY);
-        return Component.empty()
-                .append(Component.literal(headerParts[0]).withStyle(ChatFormatting.DARK_GRAY))
-                .append(keyComponent)
-                .append(Component.literal(headerParts[1]).withStyle(ChatFormatting.DARK_GRAY));
+        tooltipComponents.add(Component.translatable("powergrid.tooltip.holdForDescription",
+                        Component.translatable("create.tooltip.keyShift"))
+                .withStyle(ChatFormatting.DARK_GRAY));
     }
 
     public static class State extends LightBulb.SimpleState {

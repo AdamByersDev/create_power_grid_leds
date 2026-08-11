@@ -10,7 +10,7 @@
       "tag": "minecraft:coals"
     },
     "B": {
-      "item": "create_power_grid_leds:lv_led_bulb"
+      "item": "create_power_grid_leds:led_bulb_120"
     },
     "C": {
       "item": "powergrid:copper_coil"
@@ -20,7 +20,7 @@
     }
   },
   "result": {
-    "item": "create_power_grid_leds:led_bulb",
+    "item": "create_power_grid_leds:led_bulb_240",
     "count": 1
   }
 }
