@@ -71,7 +71,7 @@ abstract class BaseLedLightBulb extends LightBulb {
             tooltipComponents.add(Component.translatable("tooltip.create_power_grid_leds.rated_voltage")
                     .withStyle(ChatFormatting.DARK_GRAY));
             tooltipComponents.add(Component.literal(formatRating(voltage) + " V")
-                    .withStyle(ChatFormatting.DARK_CYAN));
+                    .withStyle(ChatFormatting.DARK_AQUA));
             tooltipComponents.add(Component.translatable("tooltip.create_power_grid_leds.rated_power")
                     .withStyle(ChatFormatting.DARK_GRAY));
             tooltipComponents.add(Component.literal(formatRating(power) + " W")
