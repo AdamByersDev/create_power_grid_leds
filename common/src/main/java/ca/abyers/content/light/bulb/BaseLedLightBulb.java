@@ -3,6 +3,7 @@ package ca.abyers.content.light.bulb;
 import ca.abyers.PowergridLeds;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -55,8 +56,7 @@ abstract class BaseLedLightBulb extends LightBulb {
                 RATED_POWER_WATTS,
                 ratedVoltageVolts,
                 TEMPERATURE_AT_RATED_RESISTANCE,
-                THERMAL_MASS
-        );
+                THERMAL_MASS);
     }
 
     @Override
@@ -65,10 +65,23 @@ abstract class BaseLedLightBulb extends LightBulb {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        tooltipComponents.add(Component.translatable("powergrid.tooltip.holdForDescription",
-                        Component.translatable("create.tooltip.keyShift"))
-                .withStyle(ChatFormatting.DARK_GRAY));
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents,
+            TooltipFlag isAdvanced) {
+        if (Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("tooltip.create_power_grid_leds.rated_voltage")
+                    .withStyle(ChatFormatting.DARK_GRAY));
+            tooltipComponents.add(Component.literal(formatRating(voltage) + " V")
+                    .withStyle(ChatFormatting.DARK_CYAN));
+            tooltipComponents.add(Component.translatable("tooltip.create_power_grid_leds.rated_power")
+                    .withStyle(ChatFormatting.DARK_GRAY));
+            tooltipComponents.add(Component.literal(formatRating(power) + " W")
+                    .withStyle(ChatFormatting.YELLOW));
+            return;
+        }
+
+        tooltipComponents.add(Component.translatable(
+                "tooltip.create_power_grid_leds.hold_for_properties",
+                Component.literal("[Shift]").withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
     }
 
     public static class State extends LightBulb.SimpleState {
@@ -76,8 +89,7 @@ abstract class BaseLedLightBulb extends LightBulb {
                 T bulb,
                 LightFixtureBlockEntity fixture,
                 Supplier<Function<LightBulb.State, PartialModel>> modelProviderSupplier,
-                Supplier<Function<DyedState, PartialModel>> dyedModelProviderSupplier
-        ) {
+                Supplier<Function<DyedState, PartialModel>> dyedModelProviderSupplier) {
             super(bulb, fixture, modelProviderSupplier, dyedModelProviderSupplier);
         }
 
@@ -95,12 +107,15 @@ abstract class BaseLedLightBulb extends LightBulb {
         return ResourceLocation.fromNamespaceAndPath(PowergridLeds.MOD_ID, path);
     }
 
+    private static String formatRating(float rating) {
+        return rating == (long) rating ? Long.toString((long) rating) : Float.toString(rating);
+    }
+
     private void applyRatedValues(
             float ratedPower,
             float ratedVoltage,
             float maxTemperature,
-            float thermalMass
-    ) {
+            float thermalMass) {
         this.power = ratedPower;
         this.voltage = ratedVoltage;
         this.T_max = maxTemperature;
@@ -109,7 +124,6 @@ abstract class BaseLedLightBulb extends LightBulb {
         this.thermalProperties = new ILightBulb.Properties(
                 ratedPower / DISSIPATION_DIVISOR,
                 thermalMass,
-                OVERHEAT_TEMPERATURE
-        );
+                OVERHEAT_TEMPERATURE);
     }
 }

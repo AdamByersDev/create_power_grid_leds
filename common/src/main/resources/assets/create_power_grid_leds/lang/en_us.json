@@ -3,5 +3,8 @@
   "item.create_power_grid_leds.led_filament": "LED Filament",
   "item.create_power_grid_leds.led_bulb_12": "12V LED Bulb",
   "item.create_power_grid_leds.led_bulb_120": "120V LED Bulb",
-  "item.create_power_grid_leds.led_bulb_240": "240V LED Bulb"
+  "item.create_power_grid_leds.led_bulb_240": "240V LED Bulb",
+  "tooltip.create_power_grid_leds.hold_for_properties": "Hold %s for properties",
+  "tooltip.create_power_grid_leds.rated_voltage": "Rated Voltage:",
+  "tooltip.create_power_grid_leds.rated_power": "Rated power:"
 }
