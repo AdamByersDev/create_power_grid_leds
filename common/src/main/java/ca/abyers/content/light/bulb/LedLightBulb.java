@@ -68,15 +68,12 @@ public class LedLightBulb extends LightBulb {
     public LightBulbState createState(LightFixtureBlockEntity fixture) {
         return new State(this, fixture, modelSupplier, dyedModelSupplier);
     }
-
+    
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        final boolean holdingShift = Screen.hasShiftDown();
-        if (holdingShift) {
-            appendProperties(stack, Minecraft.getInstance().player, tooltipComponents);
-        } else {
-            tooltipComponents.add(propertiesHeader(false));
-        }
+            tooltipComponents.add(Component.translatable("powergrid.tooltip.holdForDescription",
+                    Component.translatable("create.tooltip.keyShift"))
+                    .withStyle(ChatFormatting.DARK_GRAY));
     }
 
     private static Component propertiesHeader(boolean holdingShift) {
