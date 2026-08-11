@@ -13,5 +13,5 @@ dependencies {
 
     // Compile against Power Grid types from common code.
     modCompileOnly "maven.modrinth:power-grid:${rootProject.powergrid_version}"
-    modCompileOnly "dev.engine-room.flywheel:flywheel-fabric-api-${rootProject.minecraft_version}:${rootProject.flywheel_fabric_version}"
+    modCompileOnly "dev.engine-room.flywheel:flywheel-neoforge-api-${rootProject.minecraft_version}:${rootProject.flywheel_neoforge_version}"
 }
